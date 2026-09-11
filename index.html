@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#050505">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>V12 Engine Simulator — Ultimate Cockpit</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="simulator">
+  <header class="brandbar">
+    <div>
+      <div class="eyebrow">V12 ENGINE SIMULATOR</div>
+      <h1>ULTIMATE COCKPIT</h1>
+    </div>
+    <div class="status"><i id="statusDot"></i><span id="state">STANDBY</span></div>
+  </header>
+
+  <section class="cockpit">
+    <div class="paddle paddle-left" id="down"><span>−</span><small>DOWNSHIFT</small></div>
+    <div class="paddle paddle-right" id="up"><span>+</span><small>UPSHIFT</small></div>
+
+    <div class="instrument">
+      <div class="instrument-top"><span>6.5L V12 • NA</span><span id="modeBadge">COMFORT</span></div>
+      <div class="rev-ring" id="revRing">
+        <div class="ring-marks" id="ringMarks"></div>
+        <div class="ring-red"></div>
+        <div class="ring-needle" id="needle"></div>
+        <div class="ring-center">
+          <div class="micro">ENGINE SPEED</div>
+          <strong id="rpm">0000</strong>
+          <span>RPM</span>
+        </div>
+      </div>
+      <div class="main-readouts">
+        <div><small>SPEED</small><strong id="speed">000</strong><em>KM/H</em></div>
+        <div class="gear-readout"><small>GEAR</small><strong id="gear">N</strong><em id="shift">READY</em></div>
+      </div>
+      <div class="start-zone">
+        <button class="start-button" id="start"><i></i><span>START ENGINE</span></button>
+        <button class="sound-button" id="mute">SOUND ON</button>
+      </div>
+    </div>
+
+    <div class="side-data left-data">
+      <div><span>ENGINE</span><b id="engineTemp">--°C</b></div>
+      <div><span>OIL</span><b id="oilTemp">--°C</b></div>
+    </div>
+    <div class="side-data right-data">
+      <div><span>OIL PRESS.</span><b id="oilPressure">-- bar</b></div>
+      <div><span>POWER</span><b id="power">-- HP</b></div>
+    </div>
+
+    <div class="drive-modes">
+      <span>DRIVE MODE</span>
+      <button class="modeBtn active" data-mode="comfort">COMFORT</button>
+      <button class="modeBtn" data-mode="sport">SPORT</button>
+      <button class="modeBtn" data-mode="sportplus">SPORT+</button>
+    </div>
+
+    <section class="pedal-deck" aria-label="Pedals">
+      <div class="deck-label">PEDAL INPUT <span>TOUCH / HOLD</span></div>
+      <div class="pedals">
+        <button class="pedal decel" id="decelPedal"><i class="pedal-face"><b>DECEL</b><small>ENGINE BRAKE</small></i><span class="pedal-led"></span></button>
+        <button class="pedal brake" id="brakePedal"><i class="pedal-face"><b>BRAKE</b><small id="brakeValue">0%</small></i><span class="pedal-led"></span></button>
+        <button class="pedal throttle" id="throttlePedal"><i class="pedal-face"><b>THROTTLE</b><small id="throttleValue">0%</small></i><span class="pedal-led"></span></button>
+      </div>
+    </section>
+  </section>
+
+  <section class="telemetry-strip">
+    <div><span>REDLINE</span><b>9 500</b><small>RPM</small></div>
+    <div><span>LIMITER</span><b>9 500</b><small>RPM</small></div>
+    <div><span>ENGINE</span><b id="footerState">OFF</b><small>REAL V12 SAMPLE</small></div>
+    <div><span>AUDIO</span><b id="audioState">READY</b><small>SAMPLE ENGINE</small></div>
+  </section>
+
+  <div class="portrait-throttle">
+    <label><span>THROTTLE INPUT</span><b id="throttleValue2">0%</b></label>
+    <input id="throttle" type="range" min="0" max="100" value="0">
+  </div>
+</main>
+
+<section class="track-mode">
+  <header class="track-header">
+    <div><span>V12 // TRACK COCKPIT</span><strong>FULL IMMERSION</strong></div>
+    <div class="track-state"><i id="trackDot"></i><span id="trackState">STANDBY</span></div>
+  </header>
+
+  <div class="track-cockpit">
+    <div class="track-paddle track-paddle-left" id="trackDown"><span>−</span><small>DOWNSHIFT</small></div>
+    <div class="track-paddle track-paddle-right" id="trackUp"><span>+</span><small>UPSHIFT</small></div>
+
+    <div class="track-cluster">
+      <div class="cluster-top"><span>V12 • 6.5L • NATURALLY ASPIRATED</span><b id="trackMode">COMFORT</b></div>
+      <div class="track-gauge">
+        <div class="track-gauge-ring"><div class="track-progress" id="trackProgress"></div></div>
+        <div class="track-gauge-core"><small>RPM</small><strong id="trackRpm">0000</strong><span>REV / MIN</span></div>
+      </div>
+      <div class="track-numbers">
+        <div><small>SPEED</small><strong id="trackSpeed">000</strong><span>KM/H</span></div>
+        <div><small>GEAR</small><strong id="trackGear">N</strong><span id="trackShift">READY</span></div>
+      </div>
+      <button class="track-start" id="trackStart"><i></i><span>START ENGINE</span></button>
+    </div>
+
+    <div class="track-mini-data track-mini-left"><div><span>ENGINE</span><b id="trackTemp">--°C</b></div><div><span>OIL</span><b id="trackOil">--°C</b></div></div>
+    <div class="track-mini-data track-mini-right"><div><span>OIL PRESS.</span><b id="trackOilPressure">-- bar</b></div><div><span>POWER</span><b id="trackPower">-- HP</b></div></div>
+
+    <section class="track-pedal-deck">
+      <div class="deck-label">PEDAL BOX <span>TOUCH / HOLD</span></div>
+      <div class="track-pedals">
+        <button class="pedal decel" id="trackDecel"><i class="pedal-face"><b>DECEL</b><small>ENGINE BRAKE</small></i><span class="pedal-led"></span></button>
+        <button class="pedal brake" id="trackBrake"><i class="pedal-face"><b>BRAKE</b><small id="trackBrakeValue">0%</small></i><span class="pedal-led"></span></button>
+        <button class="pedal throttle" id="trackThrottle"><i class="pedal-face"><b>THROTTLE</b><small id="trackThrottleValue">0%</small></i><span class="pedal-led"></span></button>
+      </div>
+    </section>
+  </div>
+</section>
+<script src="app.js"></script>
+</body>
+</html>
